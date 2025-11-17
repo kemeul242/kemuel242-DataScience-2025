@@ -1,4 +1,5 @@
 #Kemuel Hepburn
+#Notebooks on CMPS 3603
 
-#Foundations - 05
-#
+# Foundations - 05
+# Working with Data Adv - 06
