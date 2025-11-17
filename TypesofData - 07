@@ -1,0 +1,15 @@
+#Kemuel Hepburn
+#Types of Data
+
+#Here is the corrected table:
+
+#Variable	        Qual/Quant	    Disc/Cont	Scale
+
+#Country of Birth:	Qualitative	    –        	Nominal
+#Shoe Size:	        Quantitative	Discrete*	Interval 
+#Time to Run 5k:	Quantitative	Continuous	Ratio
+##Temperature (°C):	Quantitative	Continuous	Interval
+#Number of Pets:	Quantitative	Discrete	Ratio
+
+#Shoe size is discrete (fixed increments) and technically interval because the zero point is #arbitrary, not “absence of a foot.”
+#It is NOT ordinal — sizes have equal spacing.
