@@ -1,7 +1,8 @@
 # Kemuel Hepburn
 # Notebooks on CMPS 3603
 
-#Foundations - 05\n
+#Foundations - 05
 
-#Working with Data Adv - 06\n
-#Types of Data - 07\n
+#Working with Data Adv - 06
+
+#Types of Data - 07
