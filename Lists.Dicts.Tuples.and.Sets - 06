@@ -1,0 +1,43 @@
+#Kemuel Hepubnr
+#Lists, Dicts, Tuples, and Sets (Oh My!)
+
+#Create a list of your top 5 favorite foods. Print the last item using a negative index.
+#Create a dictionary that maps student names to GPA (be kind). Add a new student.
+#Make a tuple of the days of the week. Try to change one. Document what happens.
+#Create a set of course names. Add a duplicate. Reflect on how sets feel about duplicates.
+
+# Lists
+favorite_foods = ["pizza", "sushi", "tacos", "ice cream", "burger"]
+print("Last favorite food:", favorite_foods[-1])
+
+# Tuples
+days_of_week = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+print("Days of the week tuple:", days_of_week)
+
+# Attempting to modify a tuple (uncomment to see the error)
+# days_of_week[0] = "Funday"
+# This raises TypeError: 'tuple' object does not support item assignment
+
+# Dictionaries
+student_gpa = {
+    "Bright": 3.9,
+    "Lonzo": 3.5,
+    "Magic": 3.7
+}
+
+# Add a new student
+student_gpa["Wizzo"] = 4.0
+print("Updated student GPAs:", student_gpa)
+
+# Sets
+course_names = {"CS101", "CS102", "CS103", "CS101"}  # Duplicate ignored
+print("Courses after initial set:", course_names)
+
+# Add a duplicate and a new course
+course_names.add("CS102")  # No effect
+course_names.add("CS104")
+print("Courses after modifications:", course_names)
+
+# Bonus: List comprehension for squares 1–20
+squares = [x**2 for x in range(1, 21)]
+print("Squares 1–20:", squares)
