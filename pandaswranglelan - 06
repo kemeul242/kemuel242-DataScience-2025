@@ -1,0 +1,74 @@
+#Kemuel Hepburn
+#Pandas Wrangle Lab: Clean & Explore a Real Dataset
+
+#Your turn: Filter out students who got a D, sort by last name, and export to a new file:
+#Only include columns: first_name, last_name, grade
+#Save it as "d_students.csv"
+
+import pandas as pd
+
+# Load Dataset
+df = pd.read_csv("../../data/students.csv")
+
+# Inspect the Data
+print("\n=== INFO ===")
+print(df.info())
+
+print("\n=== DESCRIPTION ===")
+print(df.describe())
+
+# Clean Missing or Invalid Data
+print("\n=== MISSING VALUES BEFORE CLEANING ===")
+print(df.isnull().sum())
+
+# Drop rows missing names
+df.dropna(subset=["first_name", "last_name"], inplace=True)
+
+# Fill missing scores with column averages
+df["math_score"].fillna(df["math_score"].mean(), inplace=True)
+df["science_score"].fillna(df["science_score"].mean(), inplace=True)
+
+print("\n=== MISSING VALUES AFTER CLEANING ===")
+print(df.isnull().sum())
+
+# Feature Engineering
+df["average_score"] = (df["math_score"] + df["science_score"]) / 2
+
+def grade(score):
+    if score >= 90:
+        return "A"
+    elif score >= 80:
+        return "B"
+    elif score >= 70:
+        return "C"
+    else:
+        return "D"
+
+df["grade"] = df["average_score"].apply(grade)
+
+# Sorting & Filtering
+print("\n=== TOP PERFORMERS (avg > 90) ===")
+print(df[df["average_score"] > 90].sort_values(by="average_score", ascending=False).head())
+
+# Group & Describe
+print("\n=== GRADE COUNTS ===")
+print(df["grade"].value_counts())
+
+print("\n=== AVERAGE SCORES PER GRADE ===")
+print(df.groupby("grade")[["math_score", "science_score", "average_score"]].mean())
+
+# Save Cleaned Dataset
+df.to_csv("student_scores_cleaned.csv", index=False)
+
+# Challenge Task
+# Filter D students → sort by last name → keep 3 columns → save
+d_students = (
+    df[df["grade"] == "D"]
+    .sort_values(by="last_name")
+    [["first_name", "last_name", "grade"]]
+)
+
+d_students.to_csv("d_students.csv", index=False)
+
+print("\n✔ Challenge complete! 'd_students.csv' has been created.\n")
+
