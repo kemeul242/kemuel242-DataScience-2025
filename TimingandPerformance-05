@@ -1,0 +1,53 @@
+#Kemuel Hepburn
+#Timing And Performance
+
+#Use %time to measure how long it takes to sort a list of 1 million random numbers.
+import random
+
+# Create a list of 1 million random numbers
+numbers = [random.random() for _ in range(1_000_000)]
+
+# Measure how long it takes to sort the list
+%time sorted_numbers = sorted(numbers)
+
+#Compare %timeit results for a list comprehension vs. a for loop that builds the same list.
+# List comprehension
+numbers = list(range(1_000))
+%timeit [x**2 for x in numbers]
+
+# For loop
+def square_loop(nums):
+    result = []
+    for x in nums:
+        result.append(x**2)
+    return result
+
+%timeit square_loop(numbers)
+
+#Wrap a longer multi-line operation with %%time to measure its runtime.
+%%time
+total = 0
+for i in range(1_000_000):
+    total += i
+average = total / 1_000_000
+average
+
+#Try squaring numbers with a Python loop, list comprehension, and NumPy array. Compare times.
+import numpy as np
+
+numbers = np.arange(1_000_000)
+
+# Python loop
+def python_loop(nums):
+    result = []
+    for x in nums:
+        result.append(x**2)
+    return result
+
+%timeit python_loop(numbers)
+
+# List comprehension
+%timeit [x**2 for x in numbers]
+
+# NumPy vectorized
+%timeit numbers**2
