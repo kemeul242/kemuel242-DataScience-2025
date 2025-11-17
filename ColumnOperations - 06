@@ -1,0 +1,95 @@
+#Kemuel Hepburn
+#Column Operations
+
+#Add a new column called "NAME_LENGTH" that contains the length of each FIRST_NAME
+#Create a column "MATH_PLUS_5" which is the math score + 5 points bonus
+
+#Load "data/students.csv" and: Create a "total_score" column by summing up all numeric test columns
+#Rename any columns that contain spaces (e.g., "Test 1") to use underscores
+#Drop any column that contains only NaN values
+
+# Column Operations: Creating, Renaming, Dropping, Applying
+import pandas as pd
+import numpy as np
+from pathlib import Path
+
+print("STEP 1 — Sample Data\n")
+data = {
+    "first_name": ["Alice", "Bob", "Charlie", "David"],
+    "last_name": ["Smith", "Jones", "Brown", "Wilson"],
+    "math_score": [85, 90, 78, 92],
+    "science_score": [88, 85, 82, 95]
+}
+
+df = pd.DataFrame(data)
+print(df, "\n")
+
+# Creating New Columns
+print("STEP 2 — Creating New Columns\n")
+
+df["average_score"] = (df["math_score"] + df["science_score"]) / 2
+df["full_name"] = df["first_name"] + " " + df["last_name"]
+
+print(df, "\n")
+
+# Renaming Columns
+print("STEP 3 — Renaming Columns\n")
+
+df.rename(columns={"math_score": "Math", "science_score": "Science"}, inplace=True)
+df.columns = [col.upper() for col in df.columns]
+
+print(df, "\n")
+
+# Dropping Columns
+print("STEP 4 — Dropping FULL_NAME column\n")
+
+df.drop(columns=["FULL_NAME"], inplace=True)
+print(df, "\n")
+
+# Applying Functions Across Columns
+print("STEP 5 — Applying grade() function\n")
+
+def grade(score):
+    if score >= 90:
+        return "A"
+    elif score >= 80:
+        return "B"
+    else:
+        return "C"
+
+df["GRADE"] = df["AVERAGE_SCORE"].apply(grade)
+print(df, "\n")
+
+# TRY IT YOURSELF — Additional Columns
+print("TRY IT YOURSELF additions\n")
+
+df["NAME_LENGTH"] = df["FIRST_NAME"].apply(len)
+df["MATH_PLUS_5"] = df["MATH"] + 5
+
+print(df, "\n")
+
+# MINI-CHALLENGE — Clean students.csv
+print("MINI-CHALLENGE — students.csv (if exists)\n")
+
+path = Path("data/students.csv")
+if path.exists():
+    students = pd.read_csv(path)
+    print("Loaded students.csv\n")
+    print("Initial columns:", students.columns.tolist(), "\n")
+
+    # 1. Create total_score column (sum numeric columns)
+    numeric_cols = students.select_dtypes(include=[np.number]).columns
+    students["total_score"] = students[numeric_cols].sum(axis=1)
+
+    # 2. Rename columns containing spaces → underscores
+    new_cols = {col: col.replace(" ", "_") for col in students.columns if " " in col}
+    students.rename(columns=new_cols, inplace=True)
+
+    # 3. Drop columns that are entirely NaN
+    students.dropna(axis=1, how="all", inplace=True)
+
+    print("Cleaned students dataset:\n")
+    print(students.head(), "\n")
+else:
+    print("No data/students.csv file found. Place it in the folder and re-run.\n")
+print("✔ All steps complete.")
