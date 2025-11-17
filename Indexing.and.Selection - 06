@@ -1,0 +1,47 @@
+#Kemuel Hepburn
+#Indexing and Selection
+
+#Select the first row using .iloc[], then again using .loc[].
+#Slice the first 5 rows and select only survived, sex, and age columns.
+#Filter the dataset for female passengers over 40.
+#Create a DataFrame of passengers in 2nd class under age 15.
+#Use .loc[] to select the rows 10–20 and only the columns fare, class, and age.
+#Bonus: Find passengers with missing age and print only their name, age, and pclass (use .isnull()).
+
+#First row via iloc and loc
+first_iloc = df.iloc[0]
+first_loc = df.loc[0]
+
+print("\n=== First row via iloc ===")
+print(first_iloc)
+
+print("\n=== First row via loc ===")
+print(first_loc)
+
+
+#First 5 rows, selected columns
+print("\n=== Rows 0–4 with survived, sex, age ===")
+print(df.loc[0:4, ["survived", "sex", "age"]])
+
+
+#Female passengers over age 40
+f_over_40 = df[(df["sex"] == "female") & (df["age"] > 40)]
+print("\n=== Female passengers over 40 ===")
+print(f_over_40.head())
+
+
+#Second class passengers under age 15
+second_under_15 = df[(df["class"] == "Second") & (df["age"] < 15)]
+print("\n=== 2nd class passengers under age 15 ===")
+print(second_under_15.head())
+
+
+#Rows 10–20 with fare, class, age
+print("\n=== Rows 10–20 (fare, class, age) ===")
+print(df.loc[10:20, ["fare", "class", "age"]])
+
+
+#Bonus: Passengers with missing age
+missing_age = df[df["age"].isnull()]
+print("\n=== Missing Age (who, age, pclass) ===")
+print(missing_age[["who", "age", "pclass"]].head())
