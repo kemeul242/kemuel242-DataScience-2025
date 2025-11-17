@@ -1,0 +1,184 @@
+#Kemuel Hepburn
+#Basic Cleaning
+
+#Modify the data dictionary at the top of this notebook. Add:
+#A new column with some None and "" values
+#At least one row with all columns filled incorrectly Then re-run the notebook and fix it step-by-step.
+
+#Load "data/survey.csv" and: Identify which columns have missing values
+#Use .isnull().sum() to get a null report
+#Use a mix of .fillna(), .dropna(), and pd.to_numeric() or pd.to_datetime() to clean it
+#Print a summary with .info() and .describe()
+
+# Cleaning Dirty Data — One runnable cell
+import pandas as pd
+import numpy as np
+from pathlib import Path
+
+pd.set_option("display.max_rows", 20)
+pd.set_option("display.max_columns", 20)
+
+print("STEP 0: Create messy DataFrame\n")
+data = {
+    "Name": ["Alice", "Bob", "Charlie", "David", None],
+    "Age": ["25", "thirty", 35, np.nan, "40"],
+    "Signup Date": ["2022-01-01", "not a date", "2022/03/01", None, "April 5, 2022"],
+    "Score": [95.5, None, 88.0, 92.5, ""]
+}
+
+df = pd.DataFrame(data)
+print("Initial DataFrame:")
+print(df)
+print("\n---\n")
+
+#Detect missing / broken values
+print("STEP 1: Missing / NaN detection\n")
+
+print("isnull() table (True == missing):")
+print(df.isnull())
+print("\nCount of nulls per column:")
+print(df.isnull().sum())
+print("\nRows that have any nulls:")
+print(df[df.isnull().any(axis=1)])
+print("\n---\n")
+
+# Quick look at weird values (empty strings, non-dates, non-numerics)
+print("STEP 2: Look for empty strings and odd values\n")
+# Empty strings in object dtype columns
+for col in df.columns:
+    if df[col].dtype == "object":
+        empty_count = (df[col] == "").sum()
+        print(f"Column '{col}' has {empty_count} empty-string entries")
+print("\nShow rows with empty-string in 'Score':")
+print(df[df["Score"] == ""])
+print("\n---\n")
+
+# Safe type conversion (coerce errors -> NaN)
+print("STEP 3: Convert types safely (coerce errors to NaN)\n")
+df_converted = df.copy()  # work on a copy so we can show before/after
+
+# Age -> numeric (coerce bad strings to NaN)
+df_converted["Age"] = pd.to_numeric(df_converted["Age"], errors="coerce")
+
+# Score -> numeric (coerce empty string/None to NaN)
+df_converted["Score"] = pd.to_numeric(df_converted["Score"], errors="coerce")
+
+# Signup Date -> datetime (coerce invalid to NaT)
+df_converted["Signup Date"] = pd.to_datetime(df_converted["Signup Date"], errors="coerce")
+
+print("After conversions (dtypes):")
+print(df_converted.dtypes)
+print("\nConverted DataFrame:")
+print(df_converted)
+print("\nCount of nulls after conversions:")
+print(df_converted.isnull().sum())
+print("\n---\n")
+
+# Impute / Fill reasonable defaults
+print("STEP 4: Imputation / Filling\n")
+df_clean = df_converted.copy()
+
+# Name: replace missing with "Unknown"
+df_clean["Name"].fillna("Unknown", inplace=True)
+
+# Age: fill with median age (after conversion)
+if df_clean["Age"].notnull().any():
+    median_age = int(df_clean["Age"].median(skipna=True))
+else:
+    median_age = 0
+df_clean["Age"].fillna(median_age, inplace=True)
+
+# Score: fill with mean score (skip NaN)
+if df_clean["Score"].notnull().any():
+    mean_score = df_clean["Score"].mean(skipna=True)
+else:
+    mean_score = 0.0
+df_clean["Score"].fillna(mean_score, inplace=True)
+
+# Signup Date: fill with earliest valid date or a fallback
+if df_clean["Signup Date"].notnull().any():
+    earliest = df_clean["Signup Date"].min()
+else:
+    earliest = pd.to_datetime("1970-01-01")
+df_clean["Signup Date"].fillna(earliest, inplace=True)
+
+print("Imputation values used:")
+print(f"  Name -> 'Unknown'\n  Age -> median: {median_age}\n  Score -> mean: {mean_score}\n  Signup Date -> {earliest}")
+print("\nData after imputation:")
+print(df_clean)
+print("\nNew null counts:")
+print(df_clean.isnull().sum())
+print("\n---\n")
+
+
+# Final cleaned overview
+print("STEP 5: Cleaned DataFrame info & summary\n")
+print(df_clean.info())
+print("\nDescriptive stats (include all):")
+print(df_clean.describe(include="all"))
+print("\n---\n")
+
+# Try It Yourself: modify the data dictionary (instructions)
+print("TRY-IT-YOURSELF NOTE:")
+print(" - To practice, modify the 'data' dict at the top (add a new column with None/'' or add a corrupt row), re-run this cell.")
+print("\n---\n")
+
+# Mini-Challenge scaffold: attempt to load data/survey.csv and clean it
+print("MINI-CHALLENGE: Attempt to load 'data/survey.csv' if present and perform quick cleaning\n")
+survey_path = Path("data/survey.csv")
+if survey_path.exists():
+    print(f"Found '{survey_path}'. Loading...")
+    survey = pd.read_csv(survey_path)
+    print("Initial survey shape:", survey.shape)
+    print("\nNull counts per column:")
+    print(survey.isnull().sum())
+    print("\nPercent of rows with any nulls: {:.2f}%".format(survey.isnull().any(axis=1).mean() * 100))
+    print("\nColumn dtypes before attempt to coerce:")
+    print(survey.dtypes)
+    print("\nAttempting automatic numeric/date coercion where sensible...")
+
+    survey_clean = survey.copy()
+
+    # Heuristic: try to convert columns with many numeric-looking values to numeric
+    for col in survey_clean.columns:
+        if survey_clean[col].dtype == object:
+            # skip obviously textual columns by simple heuristic: if majority values look numeric, coerce
+            sample_nonnull = survey_clean[col].dropna().astype(str).head(200)
+            num_like = sample_nonnull.str.match(r"^\s*-?\d+(\.\d+)?\s*$").sum()
+            if len(sample_nonnull) > 0 and (num_like / len(sample_nonnull)) > 0.6:
+                survey_clean[col] = pd.to_numeric(survey_clean[col], errors="coerce")
+                print(f"  Coerced column '{col}' -> numeric")
+            # simple date heuristic: if column name contains 'date' or 'Date'
+            elif "date" in col.lower():
+                survey_clean[col] = pd.to_datetime(survey_clean[col], errors="coerce")
+                print(f"  Coerced column '{col}' -> datetime (by name heuristic)")
+
+    print("\nNull counts after coercion attempts:")
+    print(survey_clean.isnull().sum())
+
+    # Example cleaning strategy (customize per dataset):
+    # - Drop rows that are entirely empty
+    survey_clean.dropna(how="all", inplace=True)
+    # - Fill numeric columns' missing values with median
+    for col in survey_clean.select_dtypes(include=[np.number]).columns:
+        med = survey_clean[col].median(skipna=True)
+        survey_clean[col].fillna(med, inplace=True)
+    # - Fill datetime missing with earliest date if exists
+    for col in survey_clean.select_dtypes(include=["datetime"]).columns:
+        if survey_clean[col].notnull().any():
+            survey_clean[col].fillna(survey_clean[col].min(), inplace=True)
+    # - Fill object columns missing values with 'Unknown'
+    for col in survey_clean.select_dtypes(include=["object"]).columns:
+        survey_clean[col].fillna("Unknown", inplace=True)
+
+    print("\nSummary after automatic cleaning:")
+    print(survey_clean.info())
+    print("\nNull counts after cleaning:")
+    print(survey_clean.isnull().sum())
+    # Save cleaned version next to the file
+    cleaned_path = survey_path.with_name(survey_path.stem + "_cleaned.csv")
+    survey_clean.to_csv(cleaned_path, index=False)
+    print(f"\nSaved cleaned dataset to: {cleaned_path}")
+else:
+    print("No 'data/survey.csv' found in working directory. To run the mini-challenge, place your file at data/survey.csv and re-run this cell.")
+print("\nALL DONE — cleaning flow complete.")
