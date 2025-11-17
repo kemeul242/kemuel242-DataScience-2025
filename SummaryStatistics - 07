@@ -1,0 +1,22 @@
+#Kemuel Hepburn
+#Summary Statistics 
+
+#Question: Which is more robust to outliers, the mean or the median?
+#The median is more robust to outliers. A single extreme value 
+# (like 100) can drastically pull the mean, but the median barely changes.
+
+#Exercise: Add an extreme outlier (e.g., 100) to the dataset and 
+#see how the mean, median, and standard deviation change.
+
+data_outlier = data + [100]
+
+print("Mean:",np.mean(data_outlier))
+print("Median:",np.median(data_outlier))
+print("Standard Deviation:",np.std(data_outlier, ddof=1))
+
+#Task: Use .describe() on another dataset (e.g., penguins from Seaborn or your own CSV).
+
+import seaborn as sns
+
+penguins = sns.load_dataset("penguins")
+penguins.describe()
