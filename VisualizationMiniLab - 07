@@ -1,0 +1,49 @@
+#Kemuel Hepburn
+#Visualization Mini-Lab: Trends and Outliers
+
+#Tasks:Do some species have higher average body mass than others? Yes.
+#Gentoo penguins have the highest average body mass, 
+#followed by Adelie, and Chinstrap is the lightest.
+
+#Which species tends to have longer flippers AND higher body mass?
+#Gentoo penguins tend to have both longer flippers and higher body mass.
+
+#Can you spot any outliers in the bill length data?
+#Yes — Adelie and Chinstrap show a few outlier points 
+
+#Which variables appear to be strongly correlated?
+#1. Flipper length and body mass
+#2. Bill length and bill depth also show moderate correlation
+
+#Try it Yourself
+#Try a different dataset (e.g., tips, iris).
+
+tips = sns.load_dataset("tips")
+tips.head()
+
+#Create at least 2 plots that reveal a trend.
+
+tips["tip_pct"] = tips["tip"] / tips["total_bill"] * 100
+
+sns.boxplot(data=tips, x="day", y="tip_pct")
+plt.title("Tip Percentage by Day")
+plt.show()
+
+#Create 1 plot that highlights possible outliers.
+
+sns.boxplot(data=tips, x="size", y="total_bill")
+plt.title("Total Bill Outliers by Party Size")
+plt.show()
+
+#Write a short summary of your findings.
+#In my findings of this notebook, i have concluded that:
+
+#Penguins Dataset:
+#Gentoo penguins are the largest: highest mass + longest flippers.
+#Outliers appear in bill length, especially for Adelie and Chinstrap.
+#Strong correlation between flipper length ↔ body mass.
+
+#Tips Dataset:
+#Tip amount increases with total bill (clear trend).
+#Tip percentages vary by day; weekends slightly higher.
+#Large party sizes show extreme outlier bills.
