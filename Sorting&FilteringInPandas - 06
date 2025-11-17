@@ -1,0 +1,99 @@
+#Kemuel Hepburn
+#Sorting and Filtering in Pandas
+
+#Sort the dataset by first name alphabetically
+#Find students with the same math and science score
+#Use .query() to find students who scored over 95 in either subject
+#Load "data/survey.csv" and: Sort by the most recent signup date
+#Filter out anyone who didn't complete the survey (nulls or "N/A")
+#Use .query() to select rows with a specific condition of your choice
+
+# Sorting & Filtering in Pandas — All in One Cell
+import pandas as pd
+import numpy as np
+from pathlib import Path
+
+# LOAD DATA
+print("\n=== LOAD students.csv ===\n")
+
+df = pd.read_csv("../../data/students.csv")
+print(df.head(), "\n")
+
+# SORTING
+print("\n=== SORTING EXAMPLES ===\n")
+
+print("\n-- Sort by math_score (ascending) --\n")
+print(df.sort_values(by="math_score").head(10), "\n")
+
+print("\n-- Sort by science_score (descending) --\n")
+print(df.sort_values(by="science_score", ascending=False).head(10), "\n")
+
+print("\n-- Sort by multiple columns: science desc, math asc --\n")
+print(df.sort_values(by=["science_score", "math_score"], ascending=[False, True]).head(10), "\n")
+
+# FILTERING
+print("\n=== FILTERING EXAMPLES ===\n")
+
+print("\n-- Math score ≥ 90 --\n")
+print(df[df["math_score"] >= 90].head(), "\n")
+
+print("\n-- Less than 70 in either subject --\n")
+print(df[(df["math_score"] < 70) | (df["science_score"] < 70)].head(), "\n")
+
+# COMBINING FILTERS
+print("\n=== COMBINED FILTERS ===\n")
+
+print("\n-- B+ or higher in BOTH subjects (≥ 87) --\n")
+print(df[(df["math_score"] >= 87) & (df["science_score"] >= 87)].head(), "\n")
+
+# QUERY VERSION
+print("\n=== QUERY METHOD ===\n")
+
+print(df.query("math_score >= 87 and science_score >= 87").head(), "\n")
+
+# TRY IT YOURSELF TASKS
+print("\n=== TRY IT YOURSELF TASKS ===\n")
+
+print("\n-- Sort by FIRST NAME alphabetically --\n")
+print(df.sort_values(by="first_name").head(), "\n")
+
+print("\n-- Students with SAME math AND science score --\n")
+print(df[df["math_score"] == df["science_score"]], "\n")
+
+print("\n-- Using .query(): score > 95 in EITHER subject --\n")
+print(df.query("math_score > 95 or science_score > 95").head(), "\n")
+
+# MINI-CHALLENGE — data/survey.csv
+print("\n=== MINI-CHALLENGE: survey.csv ===\n")
+
+path = Path("data/survey.csv")
+
+if path.exists():
+    survey = pd.read_csv(path)
+    print("\nLoaded survey.csv\n")
+
+    # Convert signup dates to datetime (safe)
+    if "signup_date" in survey.columns:
+        survey["signup_date"] = pd.to_datetime(survey["signup_date"], errors="coerce")
+
+    print("\n-- Sort by most recent signup date --\n")
+    print(survey.sort_values(by="signup_date", ascending=False).head(), "\n")
+
+    print("\n-- Filter OUT incomplete surveys (null or 'N/A') --\n")
+    cleaned = survey[
+        (survey.notnull().all(axis=1)) &
+        ~(survey.eq("N/A").any(axis=1))
+    ]
+    print(cleaned.head(), "\n")
+
+    print("\n-- Custom query example: age > 30 (if exists) --\n")
+    if "age" in survey.columns:
+        print(survey.query("age > 30").head(), "\n")
+    else:
+        print("No 'age' column, skipping custom query.\n")
+
+else:
+    print("⚠️ data/survey.csv not found. Place it in the /data folder and re-run.\n")
+
+
+print("\n✔ ALL SORTING & FILTERING OPERATIONS COMPLETE.\n")
