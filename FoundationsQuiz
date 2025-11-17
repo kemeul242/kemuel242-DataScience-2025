@@ -1,0 +1,98 @@
+#Kemuel Hepburn
+#Foundations Quiz
+
+#Q1. Magics
+#Question: What does %whos display?
+#Answer: %whos displays a table of all variables currently in memory, including their names, types, and a brief summary of their contents.
+
+#Q2. Markdown
+#Question: Create a Markdown cell with a heading ## My Hobbies and a bullet list of at least 3 hobbies.
+#Answer:
+
+## My Hobbies
+- Reading
+- Hiking
+- Cooking
+
+#Q3. Files and Paths
+#Question: Use %pwd to print your current working directory
+#Answer (Code cell): %pwd
+
+#Q4. File I/O
+#Question: Write Python code that saves "Hello World" to a file called hello.txt, then reads it back and prints the contents.
+#Answer (Code cell):
+
+with open("hello.txt", "w") as f:
+    f.write("Hello World")
+
+with open("hello.txt", "r") as f:
+    contents = f.read()
+print(contents)
+
+#Q5. Data I/O
+#Question: Load the file students.csv (or create a small CSV yourself) with Pandas and show the first 5 rows.
+#Answer (Code cell):
+
+import pandas as pd
+
+# Example CSV creation
+data = """Name,Age,Score
+Batman,41,99
+Robin,25,85
+Joker,22,90
+"""
+
+with open("students.csv", "w") as f:
+    f.write(data)
+
+# Load CSV into DataFrame
+df = pd.read_csv("students.csv")
+df.head()
+
+#Q6. Plotting
+#Question: Create a line plot of y = sin(x) for x values from 0 to 10.
+#Answer (Code cell):
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 10, 100)
+y = np.sin(x)
+
+plt.plot(x, y, label="sin(x)")
+plt.title("Line Plot of sin(x)")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.legend()
+plt.show()
+
+#7. Shortcuts
+#Question: In Command mode, what keyboard shortcut deletes a cell? Answer:
+#Press D twice (D D) to delete a cell in Command mode.
+
+#Q8. Help and Docs
+#Question: Use ? to display the docstring for len.
+#Answer (Code cell):
+#len?
+
+#Q9. Timing
+#Question: Compare the runtime of squaring numbers using a Python loop vs. NumPy. Use %timeit for each.
+
+#Answer (Code cell):
+
+import numpy as np
+numbers = np.arange(1_000_000)
+def square_loop(nums): # Python loop
+    result = []
+    for x in nums:
+        result.append(x**2)
+    return result
+%timeit square_loop(numbers)
+%timeit numbers**2 # NumPy vectorized
+
+#Q10. Reflection
+#Question: Why is it useful to mix Markdown and code in Jupyter notebooks?
+#Answer:
+#Mixing Markdown and code allows you to explain your thought process and document results directly alongside the code. 
+#his improves the way you read, make your analysis, much more easier to follow, and it helps others understand your workflow without 
+#needing to read just the code alone. It also supports professional reports and reproducible research.

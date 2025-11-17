@@ -1,0 +1,62 @@
+#Kemuel Hepburn
+#Working with Files and Paths
+
+#Navigate into a subfolder of your repo (e.g., Foundations/) and list its contents.
+# Change directory into a subfolder (replace 'Foundations' with your folder name)
+%cd Foundations
+%pwd  # Verify current path
+%ls   # List contents of the folder
+
+#Write your name into a file called me.txt, then read it back and print the result. 
+
+# Writing your name
+with open("me.txt", "w") as f:
+    f.write("Your Name Here\n")
+
+# Reading the file
+with open("me.txt", "r") as f:
+    contents = f.read()
+print(contents)
+
+#Write your name into a file called me.txt, then read it back and print the result.
+
+import json
+
+# Create a dictionary
+courses = {
+    "name": "Your Name Here",
+    "favorite_courses": ["Data Science", "Social Media", "Trigonometry"]
+}
+
+# Write to JSON
+with open("courses.json", "w") as f:
+    json.dump(courses, f)
+
+# Read JSON
+with open("courses.json", "r") as f:
+    loaded_courses = json.load(f)
+
+print(loaded_courses)
+
+#Create a CSV with 3 rows of your own data (e.g., pets, grades, or hobbies). Read it back and display the rows.
+
+import csv
+
+# Create CSV data
+my_data = [
+    ["Pet", "Type", "Age"],
+    ["Doggy", "Dog", 5],
+    ["Citty", "Cat", 3],
+    ["Fishy", "Fish", 1]
+]
+
+# Write CSV
+with open("my_pets.csv", "w", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerows(my_data)
+
+# Read CSV and display
+with open("my_pets.csv", "r") as f:
+    reader = csv.reader(f)
+    for row in reader:
+        print(row)

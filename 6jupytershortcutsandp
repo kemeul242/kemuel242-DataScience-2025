@@ -1,0 +1,14 @@
+#Kemuel Hepburn
+#Jupyter Shortcuts and Productivity
+
+#Try switching between Edit and Command mode and notice the border color.
+#Practice creating, deleting, and changing cell types using only shortcuts.
+#ave this notebook, then try exporting to .py or .html from the File menu.
+
+#Use %history to view the last 10 commands you ran, then save them to last10.py.
+
+# Show the last 10 commands in this session
+%history -n -10
+
+# Save the last 10 commands to a file
+%save last10.py -f -10

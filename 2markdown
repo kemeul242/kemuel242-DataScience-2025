@@ -1,0 +1,30 @@
+#Kemuel Hepburn
+#Markdown & Formatting 
+
+#Create a cell with the heading ## My Favorite Data Tools and list at least three tools in bold.
+## My Favorite Data Tools
+- **Python**
+- **Jupyter Notebook**
+- **Pandas**
+
+#Makr an ordered list of your top 3 programming languages.
+1. C++
+2. Python
+3. SQL
+
+#nsert a link to your favorite website and embed an image (can be a URL or local file).
+[My Favorite Website](https://9animetv.to)
+![The Goat](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cbr.com%2Fdragon-ball-goku-final-art-reveal%2F&psig=AOvVaw2I9zNulo9y_SQLTwgQOPp6&ust=1763191827389000&source=images&cd=vfe&opi=89978449&ved=0CBYQjRxqFwoTCICd7MeP8ZADFQAAAAAdAAAAABAE)
+
+#Write the quadratic formula in LaTeX.
+The quadratic formula is:
+$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+The discriminant is $b^2 - 4ac$.
+
+#Create a list of 3 numbers, calculate their cubes in code, then explain in Markdown.
+numbers = [2, 3, 4]
+cubes = [n**3 for n in numbers]
+cubes
+#The list `numbers` contains 2, 3, and 4.  
+#The list `cubes` contains each number raised to the third power: 8, 27, and 64.  
+#This demonstrates how combining Python calculations with Markdown explanations makes notebooks readable and professional.

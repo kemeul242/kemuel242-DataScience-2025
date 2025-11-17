@@ -1,0 +1,26 @@
+#Kemuel Hepburn
+#Magic Commands - Try it Yourself
+
+#Compare list comprehension vs generator
+print("Timing list comprehension vs generator:")
+list_time = %timeit -o [x**2 for x in range(1000)]
+gen_time = %timeit -o (x**2 for x in range(1000))
+print(f"\nList comprehension: {list_time.average:.6f} s per run")
+print(f"Generator expression: {gen_time.average:.6f} s per run\n")
+
+# 2️⃣ Define some variables and use %whos
+a = 20
+b = [1, 2, 3]
+c = {"name": "Kemmy"}
+print("Current variables in memory:")
+%whos
+
+# 3️⃣ Display a custom HTML banner
+from IPython.display import display, HTML
+
+display(HTML("""
+<h1 style="color: darkblue; text-align: center">
+🎉 Welcome to My Jupyter Notebook! 🎉
+</h1>
+<p style="color: gray; font-size: 16px">Magics make life easier ✨</p>
+"""))
