@@ -1,0 +1,55 @@
+#Kemuel Hepburn
+#Pandas Series and DataFrames
+
+#Create a Series from a dictionary of state abbreviations to population (use fake or real data).
+#Create a DataFrame for 5 students with columns: Name, GPA, Credits, Graduating (True/False).
+#Try accessing a row using .loc[] and a column using bracket notation.
+#Print the .shape, .columns, and .info() of your DataFrame.
+
+import pandas as pd
+# Series from a dictionary (state abbreviations to population)
+state_pop = {
+    "TX": 29_000_000,
+    "CA": 39_000_000,
+    "NY": 19_000_000,
+    "FL": 21_000_000,
+    "IL": 12_500_000
+}
+pop_series = pd.Series(state_pop)
+print("State Populations Series:")
+print(pop_series)
+
+# Accessing a value
+print("\nPopulation of CA:", pop_series["CA"])
+
+# 📋 Creating a DataFrame for 5 students
+data = {
+    "Name": ["Alice", "Bob", "Charlie", "Diana", "Ethan"],
+    "GPA": [3.9, 2.7, 3.4, 3.8, 3.2],
+    "Credits": [90, 45, 60, 120, 75],
+    "Graduating": [False, False, False, True, False]
+}
+students_df = pd.DataFrame(data)
+print("\nStudent DataFrame:")
+print(students_df)
+
+# Access a column
+print("\nGPA column:")
+print(students_df["GPA"])
+
+# Access a row
+print("\nCharlie's record:")
+print(students_df.loc[2])
+
+# Inspect the DataFrame
+print("\nShape:", students_df.shape)
+print("\nColumns:", students_df.columns.tolist())
+print("\nDataFrame Info:")
+students_df.info()
+print("\nDataFrame Summary Stats:")
+print(students_df.describe())
+
+# Rename a column
+students_df.rename(columns={"Graduating": "Is_Graduating"}, inplace=True)
+print("\nRenamed column DataFrame:")
+print(students_df.head())
