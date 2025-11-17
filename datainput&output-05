@@ -1,0 +1,43 @@
+#Kemuel Hepburn
+#Data Input and Output
+
+# Create your own small CSV (3–5 rows) and read it into Pandas.
+import pandas as pd
+
+# Create your own small CSV data
+my_data = """Item,Quantity,Price
+Apples,10,0.5
+Bananas,5,0.3
+Oranges,8,0.6
+"""
+
+# Save CSV file
+with open("my_items.csv", "w") as f:
+    f.write(my_data)
+
+# Read CSV into a DataFrame
+df_items = pd.read_csv("my_items.csv")
+df_items
+
+#Use .head() to preview your dataset and .describe() to see basic statistics.
+# Preview the first rows
+print(df_items.head())
+
+# Basic statistics for numeric columns
+print(df_items.describe())
+
+# Save your DataFrame to a CSV file called my_data.csv.
+# Save the DataFrame to a new CSV file
+df_items.to_csv("my_data.csv", index=False)
+
+# Check the CSV file exists
+%ls *.csv
+
+#Try saving your dataset to Excel and reading it back (if supported in your environment).
+
+# Save DataFrame to Excel
+df_items.to_excel("my_data.xlsx", index=False)
+
+# Read Excel file back
+df_excel = pd.read_excel("my_data.xlsx")
+df_excel
