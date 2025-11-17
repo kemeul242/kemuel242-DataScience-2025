@@ -5,4 +5,4 @@
 
 #Working with Data Adv - 06
 
-#Types of Data - 07
+#Describing and Visualizing Data - 07
