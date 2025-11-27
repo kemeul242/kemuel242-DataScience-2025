@@ -1,0 +1,14 @@
+#Kemuel Hepburn
+#Scalar Types
+
+# Create your own scalar variables
+age = 20          # int
+temperature = 56.6 # float
+language = 'Python' # str
+is_hungry = False  # bool
+
+# Print the variables and their types
+print(age, type(age))
+print(temperature, type(temperature))
+print(language, type(language))
+print(is_hungry, type(is_hungry))
