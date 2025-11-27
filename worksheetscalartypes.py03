@@ -1,0 +1,64 @@
+#Kemuel Hepburn
+#Worksheet for Scalar Types and Contorl FLow
+
+# Section 1: Scalar Types
+#Q1. What is the output of the following code?
+x = 10
+print(type(x))
+
+#Answer: <class 'int'>
+
+#Q2. What scalar type would best represent:
+#A person's name: str
+#Their age: int
+#Whether they passed a test: bool
+
+#Task: Type Practice
+# Create a variable for each type and print its value and type
+age = 96
+pi = 3.14
+name = "Joseph"
+passed = True
+
+print(age, type(age))
+print(pi, type(pi))
+print(name, type(name))
+print(passed, type(passed))
+
+#Section 2: Comparison Operators
+
+#Q1. What does the != operator mean?
+#Answer: Not equal to
+
+#Q2. What will the following code print?
+
+a = 5
+b = 3
+print(a < b or b < 10)
+
+#Answer: True
+
+#Section 3: Control Flow
+
+#Q1. Write a conditional that prints "Pass" if a grade is >= 70, and "Fail" otherwise.
+
+grade = int(input("Enter your grade: "))
+
+if grade >= 70:
+    print("Pass")
+else:
+    print("Fail")
+
+#Q2. What does elif allow you to do?
+#Answer: It allows you to check multiple conditions in sequence after an if statement.
+
+#Task: Your Turn
+# Ask for the weather and respond
+weather = input("What is the weather today? ")
+
+if weather.lower() == "sunny":
+    print("Bring sunscreen")
+elif weather.lower() == "raining":
+    print("Take an umbrella")
+else:
+    print("Check the forecast")
