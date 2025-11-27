@@ -1,0 +1,69 @@
+#Kemuel Hepburn
+#Worksheet
+
+#What method adds an item to the end of a list?
+#Answer: append()
+
+#How can you remove an item from a list by value?
+#Answer: remove()
+
+#What’s the result of this code?
+
+nums = [2, 4, 6]
+nums.append(8)
+print(nums)
+
+#Answer: [2, 4, 6, 8]
+
+#✏️ Task: List Practice
+# Create a list of your top 3 favorite foods
+foods = ['taco', 'chicken alfredo', 'hamburger']
+
+# Add another food to the list
+foods.append('steak')
+
+# Remove one item and print the list
+foods.remove('taco')
+print(foods)
+
+#Section 2: Tuples
+
+#What is a key difference between a list and a tuple?
+#Answer: A list is mutable, while a tuple is immutable.
+
+#Can you change the contents of a tuple once it is created? Why or why not?
+#Answer: No — tuples are immutable, meaning their contents cannot be modified, added, or removed after creation.
+
+#Task: Tuple Practice
+# Create a tuple with your favorite 3 numbers
+nums = (3, 7, 9)
+
+# Unpack into variables
+a, b, c = nums
+
+# Print each number
+print(a, b, c)
+
+#Section 3: Dictionaries
+#What does the .get() method do differently from accessing a key directly?
+#Answer: get() allows you to provide a default value if the key doesn’t exist, preventing a KeyError.
+
+#How do you loop through both keys and values in a dictionary?
+#Answer: Use .items() in a for loop.
+
+#Task: Dictionary Practice
+# Create a dictionary
+person = {
+    'name': 'JavonnieTylerDerekCooper',
+    'age': 300,
+    'hobby': 'Driving Cars'
+}
+
+# Print each key and value
+for key, value in person.items():
+    print(f"{key}: {value}")
+
+#Output:
+#name: JavonnieTylerDerekCooper
+#age: 300
+#hobby: Driving Cars
