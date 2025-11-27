@@ -1,0 +1,12 @@
+#Kemuel Hepburn
+#01 - Lists
+# 🎬 My Favorite Movies List
+favorite_movies = ["Transformers", "The Dark Knight", "One Piece", "Avatar", "Titanic"]
+
+# Sort the list alphabetically
+favorite_movies.sort()
+
+# Print the sorted list
+print("My favorite movies are, (alphabetical order):")
+for movie in favorite_movies:
+    print(movie)
