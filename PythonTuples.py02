@@ -1,0 +1,13 @@
+#Kemuel Hepburn
+#02 - Tuples
+# Create a tuple to store your birthday
+birthday = (7, 18, 2005)
+
+# Access and print the values
+print("Month:", birthday[0])
+print("Day:", birthday[1])
+print("Year:", birthday[2])
+
+# Tuple unpacking
+month, day, year = birthday
+print(f"My birthday is {month}/{day}/{year}")
