@@ -1,0 +1,24 @@
+#Kemuel Hepburn
+#Scalar Types Mini Quiz 
+#1. Which type is returned by this expression? type(True)
+#Answer: <class 'bool'>
+
+#2. What will the following print?
+
+x = 7
+print(x >= 7 and x < 10)
+
+#Answer: True
+
+#3. What does not do in a boolean expression?
+#Answer: It inverts the boolean value.
+
+#4. Fill in the blank to check for inequality:
+
+#if score != 100:
+#print("Perfect score!")
+
+#Answer: !=
+
+#5. What keyword starts a conditional chain after an if block?
+#Answer: elif
