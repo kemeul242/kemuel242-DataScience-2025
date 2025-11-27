@@ -1,0 +1,7 @@
+#Kemuel Hepburn
+#For Loops 
+#Loop over a list of 3 favorite movies and print them in all caps.
+
+movies = ['Transformers', 'Kung Fu Panda', 'Teenage Mutant Ninja Tuttles']
+for movie in movies:
+    print(movie.upper())
