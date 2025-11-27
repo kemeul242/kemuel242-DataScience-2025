@@ -1,0 +1,22 @@
+#Kemuel Hepburn
+#Mini Quiz 
+
+#1. Which list method removes an element by value?
+#remove()
+
+#2. How do you access the second element of a tuple?
+#Using index 1, eg: my_tuple[1]. 
+#Tuples are zero-indexed, so index 1 gives the second element.
+
+#3. What happens if you try to change a value in a tuple?
+#You get a TypeError, Because Tuples are immutable, so you cannot modify their elements after creation.
+
+#4. What method would you use to get all keys in a dictionary?
+#keys()
+
+#5. What is printed?
+
+d = {'a': 1, 'b': 2}
+print(d.get('c', 0))
+
+#Answer : 0
