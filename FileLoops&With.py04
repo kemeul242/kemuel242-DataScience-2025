@@ -1,0 +1,8 @@
+#Kmeuel Hepburn
+#File Loops & With
+#Open a text file and print all lines that contain more than 3 words.
+
+with open('sample.txt', 'r') as f:
+    for line in f:
+        if len(line.split()) > 3:
+            print(line.strip())
